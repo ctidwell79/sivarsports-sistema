@@ -13,19 +13,27 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-u
 header{background:var(--navy);color:#fff;padding:calc(28px + env(safe-area-inset-top)) 16px 28px}
 .in{max-width:640px;margin:0 auto}.k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
 h1{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:46px;margin:6px 0 4px}h1 span{color:var(--coral)}
-p{margin:0;opacity:.85;font-size:14px}main{max-width:640px;margin:0 auto;padding:18px 16px}
+p{margin:0;opacity:.85;font-size:14px}.top{display:flex;justify-content:space-between;align-items:center}.lang{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;font-family:inherit;cursor:pointer}main{max-width:640px;margin:0 auto;padding:18px 16px}
 a.t{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px;color:var(--ink);text-decoration:none}
 a.t b{font-family:'Bebas Neue';font-weight:400;font-size:30px;letter-spacing:.03em;display:block}a.t small{color:var(--muted)}
 a.t i{font-style:normal;font-size:26px;color:var(--coral)}a.off{opacity:.45;pointer-events:none}
 footer{text-align:center;color:var(--coral);font-family:'Bebas Neue';font-size:20px;letter-spacing:.05em;margin-top:20px}
 </style></head><body>
-<header><div class="in"><div class="k">Sivar Sports Academy · 🏀</div><h1>El Sistema <span>· 66</span></h1><p>Tu trabajo diario. Completo o nada: un día sin hacerlo pasa; dos seguidos, nunca.</p></div></header>
+<header><div class="in"><div class="top"><div class="k">Sivar Sports Academy · 🏀</div><button class="lang" id="langBtn">EN</button></div><h1>El Sistema <span>· 66</span></h1><p data-i="sub">Tu trabajo diario. Completo o nada: un día sin hacerlo pasa; dos seguidos, nunca.</p></div></header>
 <main>
-<a class="t" href="bote/"><span><b>Manejo de balón</b><small>Rutina diaria · ≈ 20 min · 3 niveles</small></span><i>▶</i></a>
-<a class="t off" href="tiro/"><span><b>Tiro</b><small>Próximamente</small></span><i>▶</i></a>
-<a class="t off" href="fuerza/"><span><b>Fuerza</b><small>Próximamente</small></span><i>▶</i></a>
-<a class="t off" href="proteina/"><span><b>Proteína</b><small>Próximamente</small></span><i>▶</i></a>
-<a class="t off" href="sueno/"><span><b>Sueño</b><small>Próximamente</small></span><i>▶</i></a>
-<a class="t off" href="agua/"><span><b>Agua</b><small>Próximamente</small></span><i>▶</i></a>
-<footer>Campeones Trabajan Como Campeones</footer>
-</main></body></html>
+<a class="t" href="bote/"><span><b data-i="bote">Manejo de balón</b><small data-i="boteSub">Rutina diaria · ≈ 20 min · 3 niveles</small></span><i>▶</i></a>
+<a class="t off" href="tiro/"><span><b data-i="tiro">Tiro</b><small data-i="soon">Próximamente</small></span><i>▶</i></a>
+<a class="t off" href="fuerza/"><span><b data-i="fuerza">Fuerza</b><small data-i="soon">Próximamente</small></span><i>▶</i></a>
+<a class="t off" href="proteina/"><span><b data-i="proteina">Proteína</b><small data-i="soon">Próximamente</small></span><i>▶</i></a>
+<a class="t off" href="sueno/"><span><b data-i="sueno">Sueño</b><small data-i="soon">Próximamente</small></span><i>▶</i></a>
+<a class="t off" href="agua/"><span><b data-i="agua">Agua</b><small data-i="soon">Próximamente</small></span><i>▶</i></a>
+<footer data-i="ctc">Campeones Trabajan Como Campeones</footer>
+</main><script>
+const T={es:{sub:"Tu trabajo diario. Completo o nada: un día sin hacerlo pasa; dos seguidos, nunca.",bote:"Manejo de balón",tiro:"Tiro",fuerza:"Fuerza",proteina:"Proteína",sueno:"Sueño",agua:"Agua",boteSub:"Rutina diaria · ≈ 20 min · 3 niveles",soon:"Próximamente",ctc:"Campeones Trabajan Como Campeones"},
+en:{sub:"Your daily work. All of it or none of it: missing one day happens; two in a row, never.",bote:"Ball handling",tiro:"Shooting",fuerza:"Strength",proteina:"Protein",sueno:"Sleep",agua:"Water",boteSub:"Daily routine · ≈ 20 min · 3 levels",soon:"Coming soon",ctc:"Champions Work Like Champions"}};
+let lang="es";try{lang=JSON.parse(localStorage.getItem("ssa-bh-lang"))||"es"}catch(e){}
+function render(){document.documentElement.lang=lang;document.querySelectorAll("[data-i]").forEach(e=>{const k=e.dataset.i;if(k=="soon")e.textContent=T[lang].soon;else e.textContent=T[lang][k]});document.getElementById("langBtn").textContent=lang=="es"?"EN":"ES";document.querySelector("h1").firstChild.textContent=lang=="es"?"El Sistema ":"The System "}
+document.getElementById("langBtn").onclick=()=>{lang=lang=="es"?"en":"es";try{localStorage.setItem("ssa-bh-lang",JSON.stringify(lang))}catch(e){}render()};
+render();
+</script>
+</body></html>
