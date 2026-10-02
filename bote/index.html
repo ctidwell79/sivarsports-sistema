@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manejo de Balón · Master Game 66 · SSA</title>
+<meta name="description" content="Rutina diaria de manejo de balón — Sivar Sports Academy. Campeones Trabajan Como Campeones.">
+<meta property="og:title" content="Manejo de Balón · Master Game 66">
+<meta property="og:description" content="Tu rutina diaria de manejo de balón — Sivar Sports Academy 🏀 #CTC">
+<meta property="og:image" content="https://sistema.sivarsports.com/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#1E2D58">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1E2D58; --navy2:#2A3D73; --coral:#E8607A; --coral-soft:#FCE9ED;
+  --bg:#F4F5F9; --card:#FFFFFF; --ink:#16203F; --muted:#5F6782; --line:#E3E6EF;
+  --ok:#1F9D6B; --ok-soft:#E3F5EC; --chip:#EEF0F6;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0E1428; --card:#172041; --ink:#EEF1FA; --muted:#A3ABC6; --line:#26315A;
+         --coral-soft:#3A2030; --ok-soft:#14352A; --chip:#212B52; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,sans-serif;font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 110px}
+header{background:var(--navy);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 16px;position:relative}
+header .in{max-width:640px;margin:0 auto}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+h1{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:36px;line-height:1;margin:6px 0 2px;letter-spacing:.02em}
+h1 span{color:var(--coral);white-space:nowrap}
+.sub{font-size:13px;opacity:.85}
+.lang{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px;background:rgba(255,255,255,.08);padding:4px;border-radius:12px}
+.levels button{border:0;background:transparent;color:#fff;padding:8px 4px;border-radius:9px;font-size:12px;font-weight:600;line-height:1.15}
+.levels button small{display:block;font-weight:400;opacity:.8;font-size:10.5px}
+.levels button[aria-pressed=true]{background:var(--coral);color:#fff}
+.stats{display:flex;gap:10px;margin-top:12px;font-size:12.5px;align-items:center}
+.bar{flex:1;height:6px;background:rgba(255,255,255,.18);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--coral);width:0;transition:width .3s}
+h2.sec{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:22px;letter-spacing:.04em;margin:22px 0 8px;color:var(--coral);display:flex;justify-content:space-between;align-items:baseline}
+h2.sec small{font-family:Poppins;font-size:12px;color:var(--muted);letter-spacing:0}
+/* quick list */
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 10px 10px 12px;margin-bottom:8px}
+.row.done{background:var(--ok-soft);border-color:transparent}
+.chk{flex:0 0 30px;height:30px;border-radius:50%;border:2px solid var(--line);background:transparent;display:grid;place-items:center;color:#fff;font-size:16px;padding:0}
+.row.done .chk{background:var(--ok);border-color:var(--ok)}
+.rmain{flex:1;min-width:0}
+.rname{font-weight:600;font-size:14.5px;line-height:1.25;background:none;border:0;padding:0;color:var(--ink);text-align:left}
+.row.done .rname{text-decoration:line-through;text-decoration-color:var(--ok)}
+.rmeta{font-size:12.5px;color:var(--muted);margin-top:2px}
+.num{font-family:'Bebas Neue';font-size:20px;color:var(--muted);flex:0 0 18px;text-align:center}
+.play{flex:0 0 42px;height:42px;border-radius:12px;border:0;background:var(--navy);color:#fff;font-size:16px;display:grid;place-items:center}
+@media (prefers-color-scheme: dark){.play{background:var(--coral)}}
+.play[disabled]{opacity:.25}
+.total{font-size:13px;color:var(--muted);text-align:center;margin:14px 0}
+.closing{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:18px}
+.closing h3{margin:0 0 4px;font-size:16px}
+.closing p{margin:0 0 10px;color:var(--muted);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 11px;font-size:13px}
+.chips button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+.stacked{display:none;background:var(--ok);color:#fff;border-radius:14px;padding:12px 14px;font-weight:600;margin-top:14px;text-align:center}
+.stacked.on{display:block}
+/* detail cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;scroll-margin-top:12px}
+.card .top{display:flex;gap:10px;align-items:flex-start}
+.card .bignum{font-family:'Bebas Neue';font-size:34px;line-height:.9;color:var(--coral)}
+.card h3{margin:0;font-size:17px;line-height:1.25}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0}
+.tag{font-size:11.5px;background:var(--chip);border-radius:999px;padding:2px 9px;color:var(--muted)}
+.tag.c{background:var(--coral-soft);color:var(--coral);font-weight:600}
+.card h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:16px 0 6px}
+.card p{margin:0}
+.card ol,.card ul{margin:0;padding-left:20px}
+.card li{margin:3px 0}
+ul.good{list-style:none;padding:0}
+ul.good li{padding-left:24px;position:relative}
+ul.good li:before{content:"✓";position:absolute;left:2px;color:var(--ok);font-weight:700}
+ul.bad{list-style:none;padding:0}
+ul.bad li{padding-left:24px;position:relative;color:var(--muted)}
+ul.bad li:before{content:"✕";position:absolute;left:3px;color:var(--coral);font-weight:700}
+.lv{border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:6px;font-size:13.5px}
+.lv b{display:flex;justify-content:space-between;gap:8px;font-size:12.5px}
+.lv b em{font-style:normal;color:var(--muted);font-weight:500}
+.lv.on{border-color:var(--coral);background:var(--coral-soft)}
+.btns{display:flex;gap:8px;margin-top:14px}
+.btn{flex:1;border:0;border-radius:12px;padding:11px;font-weight:600;font-size:14px;background:var(--navy);color:#fff;text-align:center;text-decoration:none}
+.btn.alt{background:var(--chip);color:var(--ink)}
+.note{font-size:12px;color:var(--muted);font-style:italic;margin-top:4px}
+/* good-rep page */
+.prin{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.prin b{display:block;font-size:15px;margin-bottom:2px}
+.prin span{color:var(--muted);font-size:13.5px}
+.lvbox{background:var(--navy);color:#fff;border-radius:18px;padding:16px;margin:14px 0}
+.lvbox h3{font-family:'Bebas Neue';font-weight:400;font-size:24px;margin:0 0 8px;letter-spacing:.03em}
+.lvbox div{margin:8px 0;font-size:13.5px}
+.lvbox div b{color:var(--coral)}
+.lvbox p{font-size:13px;opacity:.9;margin:10px 0 0;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:20}
+nav .in{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:640px}
+nav button{border:0;background:none;color:var(--muted);padding:9px 0 10px;font-size:11.5px;font-weight:600}
+nav button i{display:block;font-style:normal;font-size:19px;line-height:1.2}
+nav button[aria-current=page]{color:var(--coral)}
+.view{display:none}.view.on{display:block}
+/* player sheet */
+.sheet{position:fixed;inset:0;background:rgba(8,12,30,.72);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheet .box{background:var(--card);width:100%;max-width:640px;max-height:96vh;overflow:auto;border-radius:20px 20px 0 0;padding:14px 16px calc(16px + env(safe-area-inset-bottom))}
+.sheet .hd{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.sheet .hd h3{margin:0;font-size:16px;line-height:1.25}
+.sheet .hd small{color:var(--muted);font-size:12px}
+.x{border:0;background:var(--chip);color:var(--ink);border-radius:50%;width:34px;height:34px;flex:0 0 34px;font-size:16px}
+.vid{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.vid.short{aspect-ratio:9/16;max-height:58vh;width:auto;margin:0 auto}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.clipinfo{font-size:12px;color:var(--muted);margin:6px 0 0;text-align:center}
+.cues{margin-top:12px;background:var(--bg);border-radius:12px;padding:10px 12px}
+.cues b{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.src{font-size:11.5px;color:var(--muted);text-align:center;margin-top:24px}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <div class="brand"><a class="kicker" href="../" style="color:#fff;text-decoration:none">← Sivar Sports Academy · 🏀</a><button class="lang" id="langBtn">EN</button></div>
+  <h1 id="title">Manejo de balón <span>· 66</span></h1>
+  <div class="sub" id="subtitle"></div>
+  <div class="levels" id="levels"></div>
+  <div class="stats"><span id="prog"></span><div class="bar"><i id="barFill"></i></div><span id="mins"></span></div>
+</div></header>
+
+<main class="wrap">
+  <section class="view on" id="v-rutina"></section>
+  <section class="view" id="v-detalle"></section>
+  <section class="view" id="v-rep"></section>
+  <div class="src" id="src"></div>
+</main>
+
+<nav><div class="in">
+  <button data-v="rutina" aria-current="page"><i>☑︎</i><span data-t="navRoutine"></span></button>
+  <button data-v="detalle"><i>▤</i><span data-t="navDrills"></span></button>
+  <button data-v="rep"><i>★</i><span data-t="navRep"></span></button>
+</div></nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="box">
+  <div class="hd"><div><small id="shNum"></small><h3 id="shTitle"></h3><small id="shSets"></small></div><button class="x" id="shClose" aria-label="Cerrar">✕</button></div>
+  <div class="vid" id="shVid"></div>
+  <div class="clipinfo" id="shClip"></div>
+  <div class="cues"><b data-t="goodRep"></b><ul class="good" id="shCues" style="margin:6px 0 0"></ul></div>
+  <div class="btns"><button class="btn alt" id="shReplay"></button><button class="btn" id="shNext"></button></div>
+  <div class="btns" style="margin-top:8px"><a class="btn alt" id="shYT" target="_blank" rel="noopener"></a></div>
+</div></div>
+
+<script>
+/* ================= CONFIG =================
+   Paste the "Publish to web" CSV links of the Google Sheet here.
+   Sheet → File → Share → Publish to web → choose the tab → CSV → Publish → copy link.
+   Leave empty to use the copy saved inside this page.                                   */
+const DRILLS_CSV_URL  = "";   // tab: Drills
+const CONTENT_CSV_URL = "";   // tab: Contenido
+/* ========================================== */
+
+const SNAPSHOT_DRILLS  = "Section,Drill Name,What To Do (Explain The Drill),Category,Program,YouTube Link,Start (m:ss),End (m:ss),Sets / Reps,Make It harder\nWarm Up,Ladder Drill,\"In this drill, we are going to go in and out between the legs, but as we do it, we add one more rep between the legs. (Example: the first time, I go in and out between; the second time I do it, I add two tweens; the third time, I do it three times, and so on and so forth.) Stationary. Unitil I get to ten.\",Between The Legs,66 Days,https://www.youtube.com/watch?v=UKJOO5t1VUk,0:35,1:03,2 Set / 10 Reps,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\n_,Skip Mini Hip Swivel,\"In this drill, we are going to move up and down the court to half court and skip while moving our hips a little bit. This helps with changes of pace and keeps defenders guessing what the next move will be.\",Change Of Pace,66 Days,https://www.youtube.com/watch?v=UKJOO5t1VUk,1:07,1:53,2 Sets Up And Down The Court,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\n_,Mini Skip Hip Swivel Between The Legs,\"This drill is the same as the drill above,we are going to move up and down the court to half court but after the skip, we change directions with the between the legs and switch hands, going up and down half court.\",Change Of Pace,66 Days,https://www.youtube.com/watch?v=UKJOO5t1VUk,1:56,2:22,2 Sets Up And Down The Court,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\n_,Up And Down Pocket Dribble,\"In this drill, we are going to be going up and down half court, but to the side, moving our feet up and down, pocketing the dribble while looking forward, simulating protecting the ball while a defender is on you.\",Ball Protection,66 Days,https://www.youtube.com/watch?v=UKJOO5t1VUk,2:31,3:00,2 Sets Up And Down The Court,\"In this drill, it's important to have pace and protect the ball. If this becomes too easy, you can add a real defender and have him try to steal the ball from you while you protect it, and if you pass that, do it with a heavy ball.\"\n_,Between x3 + Hip Swivel + Drag Between,\"In this drill, we are going to go between the legs three times on one leg, then hip swivel in front of the defender. After switching the hips back to their original position, we are going to throw the ball in front of us and do a between the legs drag.\",Combo Moves,66 Days,https://www.youtube.com/watch?v=UKJOO5t1VUk,4:30,4:45,2 Sets Of Ten Reps Both Sides,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\nPhase 1,Wall Pass — Between The Legs,\"Get in front of a wall and go between the legs pass until you get ten, then switch sides and pass with the other hand.\",Wall Drills,66 Days,https://www.youtube.com/watch?v=-TPFvyVjoHY,0:53,1:34,2 Sets Of Ten Reps With Each Hand,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\n_,Wall Pass — Behind The Back,\"Then do the same drill again, get in front of a wall and go behind the back pass until you get ten, then switch sides and pass with the other hand.\",Wall Drills,66 Days,https://www.youtube.com/watch?v=-TPFvyVjoHY,2:55,3:21,2 Sets Of Ten Reps With Each Hand,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\n_,\"Between, Between, Behind + Wall Pass\",\"Get in front of a wall so that we can start going into our combos. We are going to go between, between, behind, and pass to the wall, because that's three changes of direction. We'll do ten\",Wall Drills,66 Days,https://www.youtube.com/watch?v=-TPFvyVjoHY,3:55,4:25,2 Sets Of Ten Reps With Each Hand,\"When this drill becomes too easy for you, you should add a weighted ball and vision-blocking glasses.\"\nPhase 2,\"Cross, Cross, Between, Between — Moving With J Randle\",\"Then we are going to get into our movement dribbles. We are going to do crossover, crossover, between, between all the way up to half court, then come back, but alternate. Since we're not robots, we are going to do long dribbles and short dribbles, alternating the speed as well, going from fast to slow, to work on coordination and rhythm.\",Moving / Full Court,66 Days,https://www.youtube.com/shorts/TISG7zJdoxE,Full Video,Full Video,2 Sets Up And Down The Court,\"Challenge yourself by practicing your pace, changing your speed and the length of your dribbles, alternating between long and short dribbles, fast and slow. When that becomes too easy, try vision-blocking glasses.\"\n_,\"In And Out, Between, Behind, Behind — Moving With J Randle\",\"Now go all the way up to half court, then come back, were going to do in and out dribble, between, behind, behind, so that we can work both hands with the same drill,  but alternate. Since we're not robots, we are going to do long dribbles and short dribbles, alternating the speed as well, going from fast to slow, to work on coordination and rhythm.\",Moving / Full Court,66 Days,https://www.youtube.com/shorts/TISG7zJdoxE,Full Video,Full Video,2 Sets Up And Down The Court,\"Challenge yourself by practicing your pace, changing your speed and length of your dribbles, alternating between long and short dribbles, fast and slow. When that becomes too easy, try vision-blocking glasses.\"\nPhase 3,CP3 Coordination Combo,\"And finally, we're going to work on hand, eye, and brain coordination like Chris Paul. We're going to do one drill, which we encourage you to do as slowly as possible at first and then slowly add speed. We're going to do a short in and out and then a long in and out, and when the ball comes back, we're immediately going into a crossover. When the ball comes back, we're going into a tween cross and then another tween cross, but this one is faster. Then we're going into a tween, behind, behind, and then do it again without stopping. Once you've done it two times, we'll move to the other hand. Although this just seems like a pointless, easy, long drill, it is not. It works focus and coordination, as well as memory, getting you ready for the game. If you feel like you're ready and that's too easy, use a weighted ball and vision-blocking glasses.\",Coordination & Vision,66 Days,https://www.youtube.com/shorts/2yrUjfYT2Fo,Full Video,Full Video,2 Sets With Both Hands,\"When you belive this drill has become too easy and you are ready for a new challange, try using a heavy ball and if you can vision blocking glasses. Another way you can challenge your self is by changing your speed and width when dribbling by alternating between long and short dribbles, slow and fast.\"\n";
+const SNAPSHOT_CONTENT = "Drill Name,Minutes,Nombre (ES),Qué hacer (ES),Paso a paso (ES),Buen rep (ES),Errores comunes (ES),Nivel 1 (ES),Nivel 1 series (ES),Nivel 2 (ES),Nivel 2 series (ES),Nivel 3 (ES),Nivel 3 series (ES),Name (EN),What to do (EN),Step by step (EN),Good rep (EN),Common mistakes (EN),Level 1 (EN),Level 1 sets (EN),Level 2 (EN),Level 2 sets (EN),Level 3 (EN),Level 3 sets (EN)\nLadder Drill,2,Escalera de entre piernas,\"Estacionario. In & out y entre piernas; en cada vuelta sumas un entre piernas más: 1, luego 2, luego 3… hasta llegar a 10 sin parar.\",\"Posición atlética: pies más anchos que los hombros, rodillas flexionadas, pecho arriba. | In & out con la mano derecha y 1 entre piernas. | Siguiente vuelta: in & out y 2 entre piernas seguidos. | Sigue sumando uno por vuelta hasta llegar a 10. | Segunda serie: empiezas con la mano izquierda.\",\"El balón pasa por el centro, entre los pies, sin tocar las piernas. | Bote por debajo de la rodilla en cada entre piernas. | Ojos arriba y cuentas en voz alta.\",Te vas poniendo de pie a medida que el conteo sube. | Botas fuerte al principio y flojo al final.,\"Hasta 5, lento. La primera vuelta puedes mirar el balón.\",2 series · hasta 5,\"Hasta 10 sin perder el balón, ritmo constante, ojos arriba.\",2 series · hasta 10,Hasta 10 con balón pesado o gafas de visión bloqueada. Sin gafas: alguien te muestra dedos y dices el número.,2 series · hasta 10,Between-the-Legs Ladder,\"Stationary. In & out, then between the legs; every round adds one more between: 1, then 2, then 3… up to 10 without stopping.\",\"Athletic stance: feet wider than shoulders, knees bent, chest up. | In & out with the right hand, then 1 between. | Next round: in & out, then 2 betweens in a row. | Keep adding one per round until you reach 10. | Second set: start with the left hand.\",\"The ball goes through the middle, between your feet, without touching your legs. | Dribble below the knee on every between. | Eyes up, count out loud.\",Standing up taller as the count goes up. | Pounding hard at the start and soft at the end.,\"Up to 5, slow. You may look at the ball on the first round.\",2 sets · up to 5,\"Up to 10 without losing the ball, steady rhythm, eyes up.\",2 sets · up to 10,Up to 10 with a heavy ball or vision-blocking glasses. No glasses: someone flashes fingers and you call the number.,2 sets · up to 10\nSkip Mini Hip Swivel,1.5,Skip con giro corto de cadera,Avanzas botando hasta media cancha con skips cortos y un pequeño giro de cadera. Es cambio de ritmo: el defensor no sabe cuál es tu siguiente movimiento.,Empiezas en la línea de fondo. | Bote de avance con la mano derecha. | Cada 2–3 botes: skip corto girando un poco la cadera. | Llegas a media cancha y regresas con la mano izquierda.,\"El bote no cambia de altura durante el skip. | Hombros y ojos al frente: la que gira es la cadera. | Skip corto y rápido, no un salto.\",Saltar alto: pierdes tiempo y control. | Mirar el balón en el skip.,\"Caminando, skip suave.\",2 idas y vueltas,\"Trotando a ritmo de juego, cambiando de ritmo.\",2 idas y vueltas,Balón pesado o gafas; o un compañero en defensa pasiva.,2 idas y vueltas,Skip Mini Hip Swivel,Dribble up to half court with short skips and a small hip swivel. It's a change of pace: the defender can't tell what's next.,Start on the baseline. | Push dribble with the right hand. | Every 2–3 dribbles: a short skip with a small hip turn. | Reach half court and come back with the left hand.,\"The dribble height doesn't change during the skip. | Shoulders and eyes forward — the hips turn. | Short, quick skip, not a jump.\",Jumping high: you lose time and control. | Looking at the ball during the skip.,\"Walking, soft skip.\",2 trips up and back,\"Jogging at game pace, changing speeds.\",2 trips up and back,Heavy ball or glasses; or a teammate playing light defense.,2 trips up and back\nMini Skip Hip Swivel Between The Legs,1.5,Skip con giro de cadera + entre piernas,\"Igual que el anterior, pero al terminar el skip cambias de dirección con un entre piernas y cambias de mano. Zigzag hasta media cancha y de regreso.\",Bote de avance y skip corto con giro de cadera. | Al caer del skip: entre piernas y cambio de mano. | Sales en la nueva dirección (zigzag). | Hasta media cancha y regresas.,El entre piernas va bajo y pegado al cuerpo. | El pie de afuera empuja el cambio de dirección. | Sales botando hacia adelante: no te quedas parado.,Entre piernas alto y lento. | Cambiar de mano sin cambiar de dirección.,\"Caminando: skip, pausa, entre piernas.\",2 idas y vueltas,\"Trotando, sin pausa entre el skip y el entre piernas.\",2 idas y vueltas,Balón pesado o gafas; o un cono como defensor y aceleras al salir.,2 idas y vueltas,Skip Hip Swivel + Between,\"Same as the previous drill, but after the skip you change direction with a between-the-legs and switch hands. Zigzag to half court and back.\",\"Push dribble and a short skip with a hip swivel. | As you land: between the legs, switch hands. | Go the new direction (zigzag). | To half court and back.\",The between stays low and tight to the body. | The outside foot pushes the change of direction. | You leave dribbling forward — you don't stop.,\"High, slow between. | Switching hands without switching direction.\",\"Walking: skip, pause, between.\",2 trips up and back,\"Jogging, no pause between the skip and the between.\",2 trips up and back,Heavy ball or glasses; or a cone as defender and burst out of the move.,2 trips up and back\nUp And Down Pocket Dribble,1.5,Bote de bolsillo lateral,\"De lado, desplazándote con pasos laterales hasta media cancha, botando en el bolsillo (al costado de la cadera) y mirando al frente, como si alguien te estuviera defendiendo.\",Ponte de lado: tu cuerpo queda entre el defensor y el balón. | Brazo libre arriba como escudo (sin empujar). | Bote pegado a la cadera de atrás: el bolsillo. | Pasos cortos laterales hasta media cancha; regresas con la otra mano.,El balón nunca cruza al frente de tu cuerpo. | Bote bajo y fuerte. | Pies rápidos y sin cruzarlos.,Botar al frente: ahí te lo roban. | Quedarte alto y lento de pies.,\"Caminando de lado, bote bajo.\",2 idas y vueltas,\"Con ritmo y pies rápidos, ojos al frente.\",2 idas y vueltas,Un defensor real intenta robarte el balón y tú solo proteges. Si lo pasas: con balón pesado.,2 idas y vueltas,Side Pocket Dribble,\"Sideways, sliding up to half court, dribbling in the pocket (beside the hip) and looking forward, as if someone is guarding you.\",Turn sideways: your body is between the defender and the ball. | Off arm up as a shield (no pushing). | Dribble tight to the back hip — the pocket. | Short side steps to half court; come back with the other hand.,\"The ball never crosses in front of your body. | Low, hard dribble. | Quick feet, never crossing them.\",Dribbling in front — that's where it gets stolen. | Standing tall with slow feet.,\"Walking sideways, low dribble.\",2 trips up and back,\"With pace and quick feet, eyes forward.\",2 trips up and back,A real defender tries to steal it and you only protect. Pass that: heavy ball.,2 trips up and back\nBetween x3 + Hip Swivel + Drag Between,2.5,3 entre piernas + giro de cadera + drag,\"Tres entre piernas con la misma pierna adelante, giro de cadera frente al defensor, regresas la cadera y empujas el balón adelante para un entre piernas en arrastre (drag).\",Pierna izquierda adelante: 3 entre piernas. | Giro de cadera hacia el defensor (amago). | Regresas la cadera a su posición. | Empujas el balón adelante y lo arrastras entre las piernas mientras das el paso. | 10 reps y cambias de lado.,\"Los 3 entre piernas con el mismo ritmo. | El giro se vende con hombros y ojos. | El drag termina en paso de ataque, listo para salir.\",Lanzar el drag muy lejos: pierdes el control. | Apurarte y saltarte el giro de cadera.,\"Solo 3 entre piernas + giro, sin drag, lento.\",2 × 5 por lado,El combo completo con ritmo.,2 × 10 por lado,Balón pesado o gafas; o terminas con 2 botes explosivos y bandeja.,2 × 10 por lado,Between x3 + Hip Swivel + Drag,\"Three betweens with the same foot forward, hip swivel at the defender, hips back, then push the ball forward into a between-the-legs drag.\",\"Left foot forward: 3 betweens. | Hip swivel toward the defender (fake). | Bring the hips back. | Push the ball forward and drag it between your legs as you step. | 10 reps, then switch sides.\",\"All 3 betweens on the same rhythm. | Sell the swivel with shoulders and eyes. | The drag ends in an attack step, ready to go.\",Throwing the drag too far — you lose control. | Rushing and skipping the hip swivel.,\"Just 3 betweens + swivel, no drag, slow.\",2 × 5 each side,Full combo with rhythm.,2 × 10 each side,Heavy ball or glasses; or finish with 2 explosive dribbles and a layup.,2 × 10 each side\nWall Pass — Between The Legs,2,Pase a la pared — entre piernas,\"Frente a una pared, a 2–3 metros: entre piernas y pase a la pared. Diez seguidos y cambias de mano.\",Marca un blanco en la pared a la altura del pecho. | Posición atlética a 2–3 metros. | Entre piernas y pase de una mano al blanco. | Recibes el rebote y repites sin pausa. | 10 reps y cambias de mano.,\"Pase firme y recto, siempre al mismo blanco. | Recibes con las manos listas y vuelves a botar sin pausa. | Ojos en el blanco, no en el balón.\",Pase flojo o bombeado. | Parar entre reps.,Lento; puedes hacer una pausa entre reps.,2 × 6 por mano,\"Sin pausa, pase firme al blanco.\",2 × 10 por mano,Más cerca de la pared y más rápido; balón pesado o gafas.,2 × 10 por mano,Wall Pass — Between the Legs,\"Facing a wall, 2–3 meters away: between the legs and pass to the wall. Ten in a row, then switch hands.\",\"Mark a target on the wall at chest height. | Athletic stance 2–3 meters away. | Between the legs and a one-hand pass to the target. | Catch the rebound and repeat without pausing. | 10 reps, then switch hands.\",\"Firm, straight pass — same target every time. | Hands ready on the catch, back to the dribble with no pause. | Eyes on the target, not the ball.\",Soft or lobbed pass. | Stopping between reps.,Slow; you may pause between reps.,2 × 6 each hand,\"No pauses, firm pass to the target.\",2 × 10 each hand,Closer to the wall and faster; heavy ball or glasses.,2 × 10 each hand\nWall Pass — Behind The Back,2,Pase a la pared — por detrás,\"Frente a una pared, a 2–3 metros: por detrás de la espalda y pase a la pared. Diez seguidos y cambias de mano.\",Marca un blanco en la pared a la altura del pecho. | Posición atlética a 2–3 metros. | Por detrás de la espalda y pase de una mano al blanco. | Recibes el rebote y repites sin pausa. | 10 reps y cambias de mano.,\"Pase firme y recto, siempre al mismo blanco. | Recibes con las manos listas y vuelves a botar sin pausa. | Ojos en el blanco, no en el balón.\",Pase flojo o bombeado. | Parar entre reps.,Lento; puedes hacer una pausa entre reps.,2 × 6 por mano,\"Sin pausa, pase firme al blanco.\",2 × 10 por mano,Más cerca de la pared y más rápido; balón pesado o gafas.,2 × 10 por mano,Wall Pass — Behind the Back,\"Facing a wall, 2–3 meters away: behind the back and pass to the wall. Ten in a row, then switch hands.\",\"Mark a target on the wall at chest height. | Athletic stance 2–3 meters away. | Behind the back and a one-hand pass to the target. | Catch the rebound and repeat without pausing. | 10 reps, then switch hands.\",\"Firm, straight pass — same target every time. | Hands ready on the catch, back to the dribble with no pause. | Eyes on the target, not the ball.\",Soft or lobbed pass. | Stopping between reps.,Slow; you may pause between reps.,2 × 6 each hand,\"No pauses, firm pass to the target.\",2 × 10 each hand,Closer to the wall and faster; heavy ball or glasses.,2 × 10 each hand\n\"Between, Between, Behind + Wall Pass\",2.5,\"Entre, entre, detrás + pase a la pared\",\"Frente a la pared: entre piernas, entre piernas, por detrás y pase a la pared. Son tres cambios de dirección antes del pase. Diez y cambias de mano.\",\"A 2–3 metros de la pared, blanco a la altura del pecho. | Entre piernas, entre piernas. | Por detrás de la espalda. | Pase de una mano al blanco, recibes y repites. | 10 reps y empiezas con la otra mano.\",\"Los tres cambios bajos y pegados al cuerpo. | El pase sale justo después del por detrás, sin bote extra. | Ojos arriba en todo el combo.\",Botes extra entre movimientos. | Pasar mirando el balón.,\"El combo sin pase, estacionario y lento.\",2 × 6 por mano,\"Combo + pase, sin pausa.\",2 × 10 por mano,Un compañero te grita «¡ya!» y pasas en ese momento; balón pesado o gafas.,2 × 10 por mano,\"Between, Between, Behind + Wall Pass\",\"Facing the wall: between, between, behind the back, then pass to the wall. Three changes of direction before the pass. Ten, then switch hands.\",\"2–3 meters from the wall, target at chest height. | Between, between. | Behind the back. | One-hand pass to the target, catch and repeat. | 10 reps, then start with the other hand.\",All three moves low and tight to the body. | The pass comes right after the behind — no extra dribble. | Eyes up through the whole combo.,Extra dribbles between moves. | Passing while looking at the ball.,\"Combo without the pass, stationary and slow.\",2 × 6 each hand,\"Combo + pass, no pauses.\",2 × 10 each hand,\"A teammate yells \"\"now!\"\" and you pass on the call; heavy ball or glasses.\",2 × 10 each hand\n\"Cross, Cross, Between, Between — Moving With J Randle\",1.5,\"Cruce, cruce, entre, entre — en movimiento (J. Randle)\",\"En movimiento hasta media cancha y de regreso: cruce, cruce, entre piernas, entre piernas. No somos robots: alternas botes largos y cortos, rápido y lento, para trabajar coordinación y ritmo.\",\"Empiezas en la línea de fondo. | Cruce, cruce, entre piernas, entre piernas mientras avanzas. | Un tramo con bote largo y rápido; el siguiente corto y lento. | Regresas empezando con la otra mano.\",\"Se nota el cambio de ritmo: nunca el mismo paso todo el tiempo. | Los cambios van bajos y pegados al cuerpo. | Ojos arriba, como si leyeras la defensa.\",\"Todo al mismo ritmo, como un robot. | Frenarte para hacer el movimiento.\",\"Caminando, un movimiento a la vez.\",2 idas y vueltas,\"Ritmo de juego, alternando largo/corto y rápido/lento.\",2 idas y vueltas,Con gafas de visión bloqueada; o terminas con bandeja o tiro.,2 idas y vueltas,\"Cross, Cross, Between, Between — Moving (J. Randle)\",\"On the move to half court and back: crossover, crossover, between, between. We're not robots: alternate long and short dribbles, fast and slow, to work coordination and rhythm.\",\"Start on the baseline. | Crossover, crossover, between, between as you move forward. | One stretch long and fast; the next short and slow. | Come back starting with the other hand.\",\"The change of pace is obvious — never the same speed the whole way. | Moves stay low and tight to the body. | Eyes up, as if reading the defense.\",\"Everything at one speed, like a robot. | Stopping to do the move.\",\"Walking, one move at a time.\",2 trips up and back,\"Game pace, alternating long/short and fast/slow.\",2 trips up and back,With vision-blocking glasses; or finish with a layup or a shot.,2 trips up and back\n\"In And Out, Between, Behind, Behind — Moving With J Randle\",1.5,\"In & out, entre, detrás, detrás — en movimiento (J. Randle)\",\"En movimiento hasta media cancha y de regreso: in & out, entre piernas, por detrás, por detrás. No somos robots: alternas botes largos y cortos, rápido y lento, para trabajar coordinación y ritmo.\",\"Empiezas en la línea de fondo. | In & out, entre piernas, por detrás, por detrás mientras avanzas. | Un tramo con bote largo y rápido; el siguiente corto y lento. | Regresas empezando con la otra mano.\",\"Se nota el cambio de ritmo: nunca el mismo paso todo el tiempo. | Los cambios van bajos y pegados al cuerpo. | Ojos arriba, como si leyeras la defensa.\",\"Todo al mismo ritmo, como un robot. | Frenarte para hacer el movimiento.\",\"Caminando, un movimiento a la vez.\",2 idas y vueltas,\"Ritmo de juego, alternando largo/corto y rápido/lento.\",2 idas y vueltas,Con gafas de visión bloqueada; o terminas con bandeja o tiro.,2 idas y vueltas,\"In & Out, Between, Behind, Behind — Moving (J. Randle)\",\"On the move to half court and back: in & out, between, behind, behind. We're not robots: alternate long and short dribbles, fast and slow, to work coordination and rhythm.\",\"Start on the baseline. | In & out, between, behind, behind as you move forward. | One stretch long and fast; the next short and slow. | Come back starting with the other hand.\",\"The change of pace is obvious — never the same speed the whole way. | Moves stay low and tight to the body. | Eyes up, as if reading the defense.\",\"Everything at one speed, like a robot. | Stopping to do the move.\",\"Walking, one move at a time.\",2 trips up and back,\"Game pace, alternating long/short and fast/slow.\",2 trips up and back,With vision-blocking glasses; or finish with a layup or a shot.,2 trips up and back\nCP3 Coordination Combo,2,Combo de coordinación CP3 (Chris Paul),\"Coordinación mano-ojo-cerebro como Chris Paul: una secuencia larga, de memoria, sin parar. Empiezas lo más lento posible y vas sumando velocidad. Parece fácil; no lo es: trabaja enfoque, coordinación y memoria.\",\"In & out corto, luego in & out largo. | Cuando vuelve el balón: cruce inmediato. | Entre-cruce (entre piernas + cruce) y otro entre-cruce, este más rápido. | Entre piernas, por detrás, por detrás. | Repites la secuencia sin parar. Dos veces y cambias de mano.\",\"La secuencia sale de memoria, sin pausas para pensar. | Cada movimiento limpio antes de subir la velocidad. | Diferencia clara entre corto y largo.\",Acelerar antes de dominar la secuencia. | Detenerse a pensar el siguiente movimiento.,Secuencia lenta; puedes decir cada movimiento en voz alta.,2 secuencias por mano,\"Dos secuencias seguidas con cada mano, sin parar.\",2 series con ambas manos,Balón pesado o gafas; varía el ancho y la velocidad del bote.,2 series con ambas manos,CP3 Coordination Combo (Chris Paul),\"Hand-eye-brain coordination like Chris Paul: one long sequence, from memory, without stopping. Start as slow as possible and add speed. It looks easy; it isn't — it trains focus, coordination and memory.\",\"Short in & out, then long in & out. | When the ball comes back: crossover right away. | Tween cross (between + cross), then another tween cross, faster. | Between, behind, behind. | Repeat the sequence without stopping. Twice, then switch hands.\",The sequence comes from memory — no pauses to think. | Every move clean before you add speed. | A clear difference between short and long.,Speeding up before you own the sequence. | Stopping to think about the next move.,Slow sequence; you may call each move out loud.,2 sequences each hand,\"Two sequences in a row with each hand, no stopping.\",2 sets both hands,Heavy ball or glasses; vary dribble width and speed.,2 sets both hands\n";
+
+const T = {
+ es:{sub:"Rutina diaria · Master Game 66 días",lv:["Nivel 1","Nivel 2","Nivel 3"],lvs:["Base","Intermedio","Avanzado"],
+  done:(a,b)=>`${a}/${b} hoy`,min:m=>`≈ ${m} min`,navRoutine:"Rutina",navDrills:"Ejercicios",navRep:"Buen rep",
+  goodRep:"Cómo se ve un buen rep",what:"Qué hacer",steps:"Paso a paso",errors:"Errores comunes",levels:"Niveles",
+  video:"▶ Ver clip",noVideo:"Sin video",replay:"↻ Repetir",next:"Siguiente ▶",close:"Cerrar",yt:"Abrir en YouTube",
+  clip:(s,e)=>e?`Clip ${s} – ${e}`:"Video completo",of:(i,n)=>`Ejercicio ${i} de ${n}`,minLabel:"min",
+  stacked:"✓ Día apilado. 1% mejor que ayer. #CTC",closeQ:"Hoy estuve…",closeP:"Marca las palabras que describen tu sesión de hoy.",
+  words:["atento","conectado","construyendo","viendo el todo","despierto","concentrado","equivocándome","repitiendo","cansado","al borde"],
+  totalTxt:(n,m)=>`${n} ejercicios · ≈ ${m} minutos`,live:t=>`Ejercicios en vivo desde la base de datos SSA · ${t}`,cached:"Copia guardada de la base de datos SSA",
+  englishOnly:"(texto original en inglés — pendiente de traducción)",harder:"Para hacerlo más difícil",
+  secs:{"warm up":"Calentamiento","phase 1":"Fase 1","phase 2":"Fase 2","phase 3":"Fase 3","cool down":"Vuelta a la calma","work out":"Entrenamiento","workout":"Entrenamiento"},
+  cats:{"stationary control":"Bote estacionario","crossover":"Cruce","between the legs":"Entre piernas","behind the back":"Por detrás","in & out":"In & out","change of pace":"Cambio de ritmo","combo moves":"Combinaciones","ball protection":"Protección del balón","two-ball":"Dos balones","wall drills":"Contra la pared","moving / full court":"En movimiento","coordination & vision":"Coordinación y visión","mobility & touch":"Movilidad y tacto"},
+  repTitle:"Cómo se ve un buen rep",repIntro:"Esto es práctica deliberada: no se trata de cuántos minutos pasaste con el balón, sino de cuántos reps buenos hiciste. Lee esto antes de tu primera sesión y vuelve aquí cuando algo no salga.",
+  prin:[["Mira antes de entrenar","Ve el clip completo una vez antes de empezar. Fíjate en los pies, la altura del bote y los ojos."],
+   ["Lento y limpio antes que rápido","Un rep limpio vale más que diez rápidos y sucios. La velocidad llega sola cuando el movimiento ya es tuyo."],
+   ["Un enfoque por ejercicio","Antes de empezar elige una sola cosa: bote bajo, ojos arriba o la mano débil. Solo una."],
+   ["Ojos arriba","El balón se siente con las yemas de los dedos; no se mira. Mira al aro o a un punto en la pared."],
+   ["Sal de tu zona de confort a propósito","Ahí es donde creces. Perder el balón en un nivel nuevo es el precio de mejorar, no la meta."],
+   ["Lo que ya dominas va a velocidad de juego","Si un movimiento ya es tuyo y lo fallas porque no estabas concentrado, estás ensayando el error para el partido."],
+   ["Cuando fallas, detente","Para, mira qué pasó (¿muy alto?, ¿muy lejos?, ¿ojos abajo?), corrige una cosa y repite lento."],
+   ["Exagera","Más bajo, más ancho y más fuerte de lo que crees necesario. En el partido sale la mitad."],
+   ["Las dos manos","La mano débil hace las mismas reps. La que va peor empieza."],
+   ["Cuenta reps, no minutos","El reloj no cuenta nada; el intento sí. Termina siempre con un rep bueno."]],
+  lvTitle:"Los tres niveles",
+  lvRows:[["Nivel 1 · Base","Estacionario o caminando, lento. Dominas el patrón y los ojos arriba."],["Nivel 2 · Intermedio","Ritmo de juego, sin pausas, con las dos manos. Es la rutina estándar del Master Game."],["Nivel 3 · Avanzado","Balón pesado, gafas de visión bloqueada, defensor o reacción a una señal."]],
+  lvRule:"Tu entrenador te asigna el nivel. Pide subir cuando completas tu nivel entero sin perder el balón y con ojos arriba, 3 días seguidos. Puedes estar en Nivel 2 en un ejercicio y en Nivel 1 en otro.",
+  sys:"Hazlo completo o no lo hagas: no hay versión corta. Un día sin hacerlo pasa; dos seguidos, nunca."},
+ en:{sub:"Daily routine · Master Game 66 days",lv:["Level 1","Level 2","Level 3"],lvs:["Base","Intermediate","Advanced"],
+  done:(a,b)=>`${a}/${b} today`,min:m=>`≈ ${m} min`,navRoutine:"Routine",navDrills:"Drills",navRep:"Good rep",
+  goodRep:"What a good rep looks like",what:"What to do",steps:"Step by step",errors:"Common mistakes",levels:"Levels",
+  video:"▶ Watch clip",noVideo:"No video",replay:"↻ Replay",next:"Next ▶",close:"Close",yt:"Open in YouTube",
+  clip:(s,e)=>e?`Clip ${s} – ${e}`:"Full video",of:(i,n)=>`Drill ${i} of ${n}`,minLabel:"min",
+  stacked:"✓ Day stacked. 1% better than yesterday. #CTC",closeQ:"Today I was…",closeP:"Tap the words that describe today's session.",
+  words:["paying attention","connected","building","seeing it whole","awake","focused","making mistakes","repeating","tired","on the edge"],
+  totalTxt:(n,m)=>`${n} drills · ≈ ${m} minutes`,live:t=>`Drills live from the SSA database · ${t}`,cached:"Saved copy of the SSA database",
+  englishOnly:"",harder:"Make it harder",
+  secs:{"warm up":"Warm Up","phase 1":"Phase 1","phase 2":"Phase 2","phase 3":"Phase 3","cool down":"Cool Down","work out":"Workout","workout":"Workout"},
+  cats:{},
+  repTitle:"What a good rep looks like",repIntro:"This is deliberate practice: it's not about how many minutes you spent with the ball, it's about how many good reps you made. Read this before your first session and come back when something isn't working.",
+  prin:[["Watch before you train","Watch the whole clip once before you start. Look at the feet, the dribble height and the eyes."],
+   ["Slow and clean before fast","One clean rep is worth more than ten fast, sloppy ones. Speed comes on its own once the move is yours."],
+   ["One focus per drill","Before you start, pick one thing: low dribble, eyes up, or the weak hand. Just one."],
+   ["Eyes up","You feel the ball with your fingertips; you don't look at it. Look at the rim or a spot on the wall."],
+   ["Leave your comfort zone on purpose","That's where you grow. Losing the ball on a new level is the price of getting better, not the goal."],
+   ["What you already own goes at game speed","If a move is already yours and you miss it because you weren't focused, you're rehearsing the mistake for the game."],
+   ["When you miss, stop","Stop, look at what happened (too high? too far? eyes down?), fix one thing and repeat it slowly."],
+   ["Exaggerate","Lower, wider and harder than you think you need. Half of it shows up in the game."],
+   ["Both hands","The weak hand does the same reps. Whichever hand is worse goes first."],
+   ["Count reps, not minutes","The clock counts nothing; the attempt does. Always finish on a good rep."]],
+  lvTitle:"The three levels",
+  lvRows:[["Level 1 · Base","Stationary or walking, slow. Own the pattern and keep your eyes up."],["Level 2 · Intermediate","Game pace, no pauses, both hands. This is the standard Master Game routine."],["Level 3 · Advanced","Heavy ball, vision-blocking glasses, a defender or reacting to a signal."]],
+  lvRule:"Your coach assigns your level. Ask to move up when you finish your whole level without losing the ball and with your eyes up, 3 days in a row. You can be Level 2 on one drill and Level 1 on another.",
+  sys:"Do all of it or none of it: there's no short version. Missing one day happens; two in a row, never."}
+};
+
+/* ---------- storage (best-effort) ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const today=new Date();const dayKey="ssa-bh-"+today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+let lang=store.get("ssa-bh-lang","es"), level=store.get("ssa-bh-level",2), state=store.get(dayKey,{done:{},words:{}});
+let drills=[], srcInfo="";
+
+/* ---------- CSV ---------- */
+function parseCSV(t){const rows=[];let r=[],f="",q=false;for(let i=0;i<t.length;i++){const c=t[i];
+ if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}
+ else if(c=='"')q=true;else if(c==','){r.push(f);f=""}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;r.push(f);rows.push(r);r=[];f=""}else f+=c}
+ if(f!==""||r.length){r.push(f);rows.push(r)}return rows}
+const norm=s=>(s||"").toString().toLowerCase().replace(/\s+/g," ").trim();
+function table(csv,keyHdr){const rows=parseCSV(csv);const hi=rows.findIndex(r=>r.some(c=>norm(c)===keyHdr));if(hi<0)return[];
+ const H=rows[hi].map(norm);return rows.slice(hi+1).map(r=>{const o={};H.forEach((h,i)=>{if(h)o[h]=(r[i]||"").trim()});return o})}
+const col=(o,...names)=>{for(const n of names){for(const k in o){if(k.startsWith(n))return o[k]}}return ""};
+const list=s=>(s||"").split("|").map(x=>x.trim()).filter(Boolean);
+
+/* ---------- video ---------- */
+function ytId(u){if(!u)return null;let m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/);return m?m[1]:null}
+function secs(s){s=(s||"").trim();if(!/^\d+(:\d{1,2}){1,2}$/.test(s))return null;return s.split(":").reduce((a,b)=>a*60+(+b),0)}
+
+/* ---------- build model ---------- */
+function build(dCsv,cCsv){
+ const content={};table(cCsv,"drill name").forEach(c=>{const k=norm(c["drill name"]);if(!k)return;
+  const L=(p,h)=>({name:col(c,h[0]),what:col(c,h[1]),steps:list(col(c,h[2])),good:list(col(c,h[3])),errors:list(col(c,h[4])),
+   lv:[[col(c,h[5]),col(c,h[6])],[col(c,h[7]),col(c,h[8])],[col(c,h[9]),col(c,h[10])]]});
+  content[k]={min:parseFloat(col(c,"minutes"))||0,
+   es:L("es",["nombre (es)","qué hacer (es)","paso a paso (es)","buen rep (es)","errores comunes (es)","nivel 1 (es)","nivel 1 series (es)","nivel 2 (es)","nivel 2 series (es)","nivel 3 (es)","nivel 3 series (es)"]),
+   en:L("en",["name (en)","what to do (en)","step by step (en)","good rep (en)","common mistakes (en)","level 1 (en)","level 1 sets (en)","level 2 (en)","level 2 sets (en)","level 3 (en)","level 3 sets (en)"])}});
+ let sec="";const out=[];
+ table(dCsv,"drill name").forEach(r=>{
+  const s=col(r,"section");if(s&&s!=="_"&&s!=="-")sec=s;
+  const name=col(r,"drill name");if(!name)return;
+  const status=norm(col(r,"status"));if(["proposed","reviewing","rejected"].includes(status))return;
+  const prog=norm(col(r,"program"));if(prog&&!/66|both|ambos/.test(prog))return;
+  out.push({section:sec||"Warm Up",name,what:col(r,"what to do"),cat:col(r,"category"),link:col(r,"youtube link"),
+   start:col(r,"start"),end:col(r,"end"),sets:col(r,"sets"),harder:col(r,"make it harder"),c:content[norm(name)]||null});
+ });
+ return out;
+}
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const t=()=>T[lang];
+function D(d){ // localized view of a drill
+ const c=d.c&&d.c[lang]&&d.c[lang].name?d.c[lang]:null;
+ const fallbackLv=[[ lang=="es"?"Lento y controlado, ojos arriba.":"Slow and controlled, eyes up.", d.sets],
+                   [ lang=="es"?"Ritmo de juego, sin pausas.":"Game pace, no pauses.", d.sets],
+                   [ d.harder || (lang=="es"?"Balón pesado o gafas de visión bloqueada.":"Heavy ball or vision-blocking glasses."), d.sets]];
+ return {name:c?c.name:d.name, what:c?c.what:d.what, steps:c?c.steps:[], good:c&&c.good.length?c.good:[], errors:c?c.errors:[],
+  lv:c&&c.lv[0][0]?c.lv:fallbackLv, translated:!!c, min:(d.c&&d.c.min)||2};
+}
+const secName=s=>t().secs[norm(s)]||s;
+const catName=s=>t().cats[norm(s)]||s;
+const fmtMin=m=>Math.round(m);
+
+/* ---------- render ---------- */
+function groups(){const g=[];drills.forEach((d,i)=>{let last=g[g.length-1];if(!last||last.s!==d.section){last={s:d.section,items:[]};g.push(last)}last.items.push([d,i])});return g}
+function renderHeader(){
+ $("#langBtn").textContent=lang=="es"?"EN":"ES";document.documentElement.lang=lang;
+ $("#title").innerHTML=(lang=="es"?"Manejo de balón":"Ball handling")+" <span>· 66</span>";
+ $("#subtitle").textContent=t().sub;
+ $("#levels").innerHTML=[1,2,3].map(n=>`<button data-l="${n}" aria-pressed="${n==level}">${t().lv[n-1]}<small>${t().lvs[n-1]}</small></button>`).join("");
+ document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t()[e.dataset.t]);
+ const done=drills.filter((d,i)=>state.done[d.name]).length;
+ $("#prog").textContent=t().done(done,drills.length);$("#barFill").style.width=(drills.length?done/drills.length*100:0)+"%";
+ $("#mins").textContent=t().min(fmtMin(drills.reduce((a,d)=>a+D(d).min,0)));
+ $("#src").textContent=srcInfo;
+}
+function renderRutina(){
+ if(!drills.length){$("#v-rutina").innerHTML=`<div class="empty">…</div>`;return}
+ let h="";groups().forEach(g=>{const m=g.items.reduce((a,[d])=>a+D(d).min,0);
+  h+=`<h2 class="sec">${esc(secName(g.s))}<small>${t().min(fmtMin(m))}</small></h2>`;
+  g.items.forEach(([d,i])=>{const L=D(d),done=!!state.done[d.name],vid=ytId(d.link);
+   h+=`<div class="row ${done?"done":""}"><button class="chk" data-done="${i}" aria-label="✓">${done?"✓":""}</button>
+   <div class="num">${i+1}</div>
+   <div class="rmain"><button class="rname" data-go="${i}">${esc(L.name)}</button>
+   <div class="rmeta">${esc(L.lv[level-1][1]||d.sets)} · ${L.min} ${t().minLabel}</div></div>
+   <button class="play" data-play="${i}" ${vid?"":"disabled"} aria-label="${t().video}">▶</button></div>`})});
+ const all=drills.every(d=>state.done[d.name]);
+ h+=`<div class="stacked ${all?"on":""}">${t().stacked}</div>
+ <div class="closing"><h3>${t().closeQ}</h3><p>${t().closeP}</p><div class="chips">${t().words.map((w,k)=>`<button data-w="${k}" aria-pressed="${!!state.words[k]}">${esc(w)}</button>`).join("")}</div></div>
+ <div class="total">${t().totalTxt(drills.length,fmtMin(drills.reduce((a,d)=>a+D(d).min,0)))}</div>`;
+ $("#v-rutina").innerHTML=h;
+}
+function renderDetalle(){
+ let h="";groups().forEach(g=>{h+=`<h2 class="sec">${esc(secName(g.s))}</h2>`;
+  g.items.forEach(([d,i])=>{const L=D(d),vid=ytId(d.link);
+   h+=`<article class="card" id="d${i}"><div class="top"><div class="bignum">${i+1}</div><div><h3>${esc(L.name)}</h3>
+    <div class="chiprow"><span class="tag c">${esc(catName(d.cat))}</span><span class="tag">≈ ${L.min} ${t().minLabel}</span>${lang=="es"&&L.translated?`<span class="tag">${esc(d.name)}</span>`:""}</div></div></div>
+    <h4>${t().what}</h4><p>${esc(L.what)}</p>${!L.translated&&lang=="es"?`<div class="note">${t().englishOnly}</div>`:""}
+    ${L.steps.length?`<h4>${t().steps}</h4><ol>${L.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
+    ${L.good.length?`<h4>${t().goodRep}</h4><ul class="good">${L.good.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`:""}
+    ${L.errors.length?`<h4>${t().errors}</h4><ul class="bad">${L.errors.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`:""}
+    <h4>${t().levels}</h4>${L.lv.map((x,k)=>`<div class="lv ${k+1==level?"on":""}"><b>${t().lv[k]} · ${t().lvs[k]}<em>${esc(x[1]||d.sets)}</em></b>${esc(x[0])}</div>`).join("")}
+    <div class="btns"><button class="btn" data-play="${i}" ${vid?"":"disabled"}>${vid?t().video:t().noVideo}</button></div></article>`})});
+ $("#v-detalle").innerHTML=h;
+}
+function renderRep(){
+ $("#v-rep").innerHTML=`<h2 class="sec">${t().repTitle}</h2><p style="color:var(--muted);margin:0 0 12px">${t().repIntro}</p>
+ ${t().prin.map((p,k)=>`<div class="prin"><b>${k+1}. ${esc(p[0])}</b><span>${esc(p[1])}</span></div>`).join("")}
+ <div class="lvbox"><h3>${t().lvTitle}</h3>${t().lvRows.map(r=>`<div><b>${esc(r[0])}</b><br>${esc(r[1])}</div>`).join("")}<p>${t().lvRule}</p><p>${t().sys}</p></div>
+ <p style="text-align:center;font-family:'Bebas Neue';font-size:20px;letter-spacing:.05em;color:var(--coral)">Campeones Trabajan Como Campeones</p>`;
+}
+function renderAll(){renderHeader();renderRutina();renderDetalle();renderRep()}
+
+/* ---------- player ---------- */
+let cur=-1;
+function openPlayer(i){cur=i;const d=drills[i],L=D(d),id=ytId(d.link);if(!id)return;
+ const s=secs(d.start),e=secs(d.end),isShort=/shorts\//.test(d.link);
+ $("#shNum").textContent=t().of(i+1,drills.length);$("#shTitle").textContent=L.name;
+ $("#shSets").textContent=`${t().lv[level-1]} · ${L.lv[level-1][1]||d.sets}`;
+ $("#shClip").textContent=t().clip(d.start,e?d.end:null);
+ $("#shCues").innerHTML=(L.good.length?L.good:[L.lv[level-1][0]]).map(x=>`<li>${esc(x)}</li>`).join("");
+ $("#shReplay").textContent=t().replay;$("#shNext").textContent=i<drills.length-1?t().next:t().close;
+ $("#shYT").textContent=t().yt;$("#shYT").href=`https://www.youtube.com/watch?v=${id}${s?`&t=${s}s`:""}`;
+ const v=$("#shVid");v.className="vid"+(isShort?" short":"");
+ const q=new URLSearchParams({playsinline:1,rel:0,modestbranding:1,autoplay:1});if(s)q.set("start",s);if(e)q.set("end",e);
+ v.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?${q}&r=${Date.now()}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(L.name)}"></iframe>`;
+ $("#sheet").classList.add("on");document.body.style.overflow="hidden";
+}
+function closePlayer(){$("#sheet").classList.remove("on");$("#shVid").innerHTML="";document.body.style.overflow="";}
+$("#shClose").onclick=closePlayer;$("#sheet").onclick=e=>{if(e.target.id=="sheet")closePlayer()};
+$("#shReplay").onclick=()=>openPlayer(cur);
+$("#shNext").onclick=()=>{let n=cur+1;while(n<drills.length&&!ytId(drills[n].link))n++;n<drills.length?openPlayer(n):closePlayer()};
+
+/* ---------- events ---------- */
+function show(v){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id=="v-"+v));
+ document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.v==v?"page":"false"));window.scrollTo(0,0)}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.v){show(b.dataset.v)}
+ else if(b.dataset.l){level=+b.dataset.l;store.set("ssa-bh-level",level);renderAll()}
+ else if(b.dataset.done){const d=drills[+b.dataset.done];state.done[d.name]=!state.done[d.name];store.set(dayKey,state);renderHeader();renderRutina()}
+ else if(b.dataset.w){state.words[b.dataset.w]=!state.words[b.dataset.w];store.set(dayKey,state);b.setAttribute("aria-pressed",!!state.words[b.dataset.w])}
+ else if(b.dataset.play){openPlayer(+b.dataset.play)}
+ else if(b.dataset.go){show("detalle");const el=document.getElementById("d"+b.dataset.go);if(el)el.scrollIntoView({behavior:"smooth"})}
+ else if(b.id=="langBtn"){lang=lang=="es"?"en":"es";store.set("ssa-bh-lang",lang);renderAll()}
+});
+document.addEventListener("keydown",e=>{if(e.key=="Escape")closePlayer()});
+
+/* ---------- load ---------- */
+async function fetchText(u){const r=await fetch(u+(u.includes("?")?"&":"?")+"_="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;return r.text()}
+(async()=>{
+ drills=build(SNAPSHOT_DRILLS,SNAPSHOT_CONTENT);srcInfo=T[lang].cached;renderAll();
+ if(!DRILLS_CSV_URL)return;
+ try{const [d,c]=await Promise.all([fetchText(DRILLS_CSV_URL),CONTENT_CSV_URL?fetchText(CONTENT_CSV_URL).catch(()=>SNAPSHOT_CONTENT):Promise.resolve(SNAPSHOT_CONTENT)]);
+  const live=build(d,c);if(live.length){drills=live;const n=new Date();srcInfo=T[lang].live(n.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}));renderAll()}}
+ catch(e){}
+})();
+</script>
+</body>
+</html>
