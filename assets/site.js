@@ -1,8 +1,10 @@
 /* SSA · El Sistema — shared: language toggle (ES/EN) + scroll reveal */
 (function(){
   const KEY="ssa-bh-lang";
-  const get=()=>{try{return JSON.parse(localStorage.getItem(KEY))||"es"}catch(e){return "es"}};
-  const set=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}};
+  // Spanish is ALWAYS the default. EN only for this tab (sessionStorage) or with ?lang=en.
+  const KEY2="ssa-site-lang";
+  const get=()=>{const q=new URLSearchParams(location.search).get("lang");if(q=="en"||q=="es")return q;try{return sessionStorage.getItem(KEY2)||"es"}catch(e){return "es"}};
+  const set=v=>{try{sessionStorage.setItem(KEY2,v)}catch(e){}};
   window.SSA={lang:get(),
     t(k){const T=window.T||{};return (T[this.lang]&&T[this.lang][k])??(T.es&&T.es[k])??""},
     apply(){

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
-<link rel="preload" as="image" href="img/hero-gym.webp">
+<link rel="preload" as="image" href="img/hero-gym-m.webp" media="(max-width:700px)"><link rel="preload" as="image" href="img/hero-gym.webp" media="(min-width:701px)">
 </head><body>
 
 <nav class="nav"><div class="wrap">
@@ -19,8 +19,8 @@
 </div></nav>
 
 <!-- 1 · HERO -->
-<section class="hero">
- <img src="img/hero-gym.webp" alt="" fetchpriority="high">
+<section class="hero main">
+ <picture><source media="(max-width:700px)" srcset="img/hero-gym-m.webp"><img src="img/hero-gym.webp" alt="" fetchpriority="high"></picture>
  <div class="in">
   <p class="eyebrow" data-i="heroEye">Sivar Sports Academy</p>
   <h1 class="h-xl" data-i="heroH">El Sistema.</h1>
@@ -79,7 +79,7 @@
   <div class="row3">
    <a class="comp photo" href="bote/"><img src="img/bote.webp" alt="" loading="lazy"><span class="go">›</span><b data-i="c1">Manejo de balón</b><small data-i="c1s">Disponible · rutina diaria</small></a>
    <a class="comp photo off" href="tiro/"><img src="img/tiro.webp" alt="" loading="lazy"><b data-i="c2">Tiro</b><small data-i="soon">Próximamente</small></a>
-   <a class="comp photo off" href="fuerza/"><img src="img/ep7.webp" alt="" loading="lazy"><b data-i="c3">Fuerza</b><small data-i="soon">Próximamente</small></a>
+   <a class="comp photo off" href="fuerza/"><img src="img/fuerza.webp" alt="" loading="lazy"><b data-i="c3">Fuerza</b><small data-i="soon">Próximamente</small></a>
   </div>
  </div>
 

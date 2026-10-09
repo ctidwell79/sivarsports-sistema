@@ -22,10 +22,10 @@ a{color:inherit}
 .brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--navink)}
 .brand svg{width:20px;height:20px}
 .nav .links{display:flex;gap:20px;margin-left:auto;font-size:13px}
-.nav .links a{text-decoration:none;color:var(--navink);opacity:.8}
+.nav .links a{text-decoration:none;color:var(--navink);opacity:.8;white-space:nowrap}
 .nav .links a:hover,.nav .links a[aria-current=page]{opacity:1}
 .lang{border:0;background:transparent;color:var(--navink);font:600 12px/1 inherit;padding:6px 10px;border-radius:999px;border:1px solid var(--line);cursor:pointer}
-@media (max-width:640px){.nav .links a.hide-sm{display:none}.nav .links{gap:14px}}
+@media (max-width:640px){.nav .links a.hide-sm,.nav .links a:first-child{display:none}.nav .links{gap:14px}}
 
 /* ---------- type ---------- */
 .eyebrow{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--coral);margin:0 0 10px}
@@ -52,10 +52,12 @@ section{position:relative}
 
 /* hero with image */
 .hero{position:relative;min-height:min(88vh,820px);display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#fff;overflow:hidden;background:#05070f}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;transform:scale(1.04);animation:heroZoom 14s var(--ease) forwards}
+.hero>img,.hero>picture>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;transform:scale(1.04);animation:heroZoom 14s var(--ease) forwards}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,15,.15) 0%,rgba(5,7,15,.0) 30%,rgba(5,7,15,.65) 70%,rgba(5,7,15,.92) 100%)}
 .hero .in{position:relative;z-index:1;padding:0 20px 64px;max-width:900px}
 .hero .lead{color:rgba(255,255,255,.82)}
+/* phones: hero fits the first screen, title visible without scrolling */
+@media (max-width:700px){.hero{min-height:0;height:min(76svh,640px)}.hero .in{padding-bottom:34px}.hero .h-xl{font-size:46px}.hero .lead{font-size:18px;margin-top:8px}.hero .ctas{margin-top:16px}.hero.main>picture>img{object-position:50% 30%}}
 @keyframes heroZoom{to{transform:scale(1)}}
 
 /* tiles (Apple homepage promo grid) */
@@ -126,4 +128,4 @@ footer.site p{margin:4px 0}
 /* reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero>img{animation:none;transform:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero>img,.hero>picture>img{animation:none;transform:none}html{scroll-behavior:auto}}
