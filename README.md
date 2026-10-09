@@ -1,6 +1,6 @@
 # SSA · El Sistema — Master Game 66
 
-Layout: `/` = menu · `/bote/` = ball handling (live) · `/tiro/` = shooting (next). Each section is its own folder with its own index.html and its own Sheet tabs.
+Layout: `/` = menu · `/antes/` = Antes del Binder videos (live) · `/bote/` = ball handling (live) · `/tiro/` = shooting (next). Each section is its own folder with its own index.html and its own Sheet tabs.
 
 Static mobile page. No build step. Netlify serves this folder as-is.
 
@@ -24,3 +24,9 @@ Static mobile page. No build step. Netlify serves this folder as-is.
 
 ## Roadmap folders
 `/bote` (live) · `/tiro` · `/fuerza` · `/proteina` · `/sueno` · `/agua` — tiles already on the hub, marked Próximamente.
+
+## Antes del Binder (`/antes/`)
+- 8 videos hosted **Unlisted** on the Sivar YouTube channel, embedded with youtube-nocookie.
+- Config = the `VIDEOS` array at the top of the `<script>` in `antes/index.html`: `{n, date, yt, min}`.
+- A video goes live when it has a YouTube ID/link in `yt` **and** its `date` has arrived (00:00 El Salvador). Upload ahead, set the date, and it releases itself.
+- Schedule: one per Friday, Oct 9 → Nov 27 2026. Card text (ES/EN) lives in the `C` object.
