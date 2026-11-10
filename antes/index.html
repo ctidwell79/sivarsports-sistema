@@ -223,7 +223,8 @@ watch:"Watch video",vid:"Video",min:"min",sheets:"Sheets in this video",now:"Wat
 
 const SV="-06:00";
 const relTime=v=>Date.parse(v.date+"T00:00:00"+SV);
-const isOut=v=>!!v.yt&&Date.now()>=relTime(v);
+const PREVIEW=new URLSearchParams(location.search).has("preview"); // ?preview shows registered videos before their date (for checking)
+const isOut=v=>!!v.yt&&(PREVIEW||Date.now()>=relTime(v));
 const L=()=>SSA.lang, u=k=>T[L()][k];
 const fmtDate=v=>new Date(v.date+"T12:00:00"+SV).toLocaleDateString(L()=="es"?"es-SV":"en-US",{weekday:"short",day:"numeric",month:"short",timeZone:"America/El_Salvador"});
 const ytId=s=>{s=(s||"").trim();const m=s.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:s};
